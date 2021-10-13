@@ -1,0 +1,4 @@
+/home/stud2020/0bardel/Desktop/lab2/build/CMakeFiles/rebuild_cache.dir
+/home/stud2020/0bardel/Desktop/lab2/build/CMakeFiles/edit_cache.dir
+/home/stud2020/0bardel/Desktop/lab2/build/CMakeFiles/ProjectLibrary.dir
+/home/stud2020/0bardel/Desktop/lab2/build/CMakeFiles/Lab2.dir

@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/TestLab.h
+
+/home/stud2020/0bardel/Desktop/lab2/src/TestLab.cpp
+TestLab.h
+/home/stud2020/0bardel/Desktop/lab2/src/TestLab.h
+

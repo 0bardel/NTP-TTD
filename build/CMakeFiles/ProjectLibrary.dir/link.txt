@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -Wall  -shared -Wl,-soname,libProjectLibrary.so -o libProjectLibrary.so CMakeFiles/ProjectLibrary.dir/src/TestLab.cpp.o 

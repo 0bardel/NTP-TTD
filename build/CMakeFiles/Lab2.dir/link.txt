@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall  -rdynamic CMakeFiles/Lab2.dir/main.cpp.o  -o Lab2 -Wl,-rpath,/home/stud2020/0bardel/Desktop/lab2/build libProjectLibrary.so 
