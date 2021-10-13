@@ -3,12 +3,12 @@
 
 int main(){
 
-TEST *a = new TEST();
+TEST a ;
 std::cout << "Test " << whatever(*a) << std::endl;
 
-#ifdef MY_VARIABLE
-delete a;
-#endif
+
+
+
 return 0;
 }
 
