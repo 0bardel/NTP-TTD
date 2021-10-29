@@ -6,9 +6,13 @@
 
 #IncludeRegexTransform: 
 
-../include/TestLab.h
+../include/functions.h
 
-/home/stud2020/0bardel/Desktop/lab2/src/TestLab.cpp
-TestLab.h
-/home/stud2020/0bardel/Desktop/lab2/src/TestLab.h
+/home/stud2020/0bardel/TDD/src/functions.cpp
+iostream
+-
+functions.h
+-
+string.h
+-
 

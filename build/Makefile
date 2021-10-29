@@ -48,24 +48,37 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/stud2020/0bardel/Desktop/lab2
+CMAKE_SOURCE_DIR = /home/stud2020/0bardel/TDD
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/stud2020/0bardel/Desktop/lab2/build
+CMAKE_BINARY_DIR = /home/stud2020/0bardel/TDD/build
 
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
 
-.PHONY : rebuild_cache/fast
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -78,11 +91,44 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/stud2020/0bardel/Desktop/lab2/build/CMakeFiles /home/stud2020/0bardel/Desktop/lab2/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stud2020/0bardel/TDD/build/CMakeFiles /home/stud2020/0bardel/TDD/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/stud2020/0bardel/Desktop/lab2/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/stud2020/0bardel/TDD/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,6 +157,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named run
+
+# Build rule for target.
+run: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run
+.PHONY : run
+
+# fast build rule for target.
+run/fast:
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
+.PHONY : run/fast
+
+#=============================================================================
 # Target rules for targets named ProjectLibrary
 
 # Build rule for target.
@@ -124,17 +183,56 @@ ProjectLibrary/fast:
 .PHONY : ProjectLibrary/fast
 
 #=============================================================================
-# Target rules for targets named Lab2
+# Target rules for targets named gmock_main
 
 # Build rule for target.
-Lab2: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Lab2
-.PHONY : Lab2
+gmock_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock_main
+.PHONY : gmock_main
 
 # fast build rule for target.
-Lab2/fast:
-	$(MAKE) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/build
-.PHONY : Lab2/fast
+gmock_main/fast:
+	$(MAKE) -f googletest/googlemock/CMakeFiles/gmock_main.dir/build.make googletest/googlemock/CMakeFiles/gmock_main.dir/build
+.PHONY : gmock_main/fast
+
+#=============================================================================
+# Target rules for targets named gmock
+
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gmock
+.PHONY : gmock
+
+# fast build rule for target.
+gmock/fast:
+	$(MAKE) -f googletest/googlemock/CMakeFiles/gmock.dir/build.make googletest/googlemock/CMakeFiles/gmock.dir/build
+.PHONY : gmock/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f googletest/googletest/CMakeFiles/gtest_main.dir/build.make googletest/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f googletest/googletest/CMakeFiles/gtest.dir/build.make googletest/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
 
 main.o: main.cpp.o
 
@@ -142,7 +240,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -151,7 +249,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -160,35 +258,35 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/Lab2.dir/build.make CMakeFiles/Lab2.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/TestLab.o: src/TestLab.cpp.o
+src/functions.o: src/functions.cpp.o
 
-.PHONY : src/TestLab.o
+.PHONY : src/functions.o
 
 # target to build an object file
-src/TestLab.cpp.o:
-	$(MAKE) -f CMakeFiles/ProjectLibrary.dir/build.make CMakeFiles/ProjectLibrary.dir/src/TestLab.cpp.o
-.PHONY : src/TestLab.cpp.o
+src/functions.cpp.o:
+	$(MAKE) -f CMakeFiles/ProjectLibrary.dir/build.make CMakeFiles/ProjectLibrary.dir/src/functions.cpp.o
+.PHONY : src/functions.cpp.o
 
-src/TestLab.i: src/TestLab.cpp.i
+src/functions.i: src/functions.cpp.i
 
-.PHONY : src/TestLab.i
+.PHONY : src/functions.i
 
 # target to preprocess a source file
-src/TestLab.cpp.i:
-	$(MAKE) -f CMakeFiles/ProjectLibrary.dir/build.make CMakeFiles/ProjectLibrary.dir/src/TestLab.cpp.i
-.PHONY : src/TestLab.cpp.i
+src/functions.cpp.i:
+	$(MAKE) -f CMakeFiles/ProjectLibrary.dir/build.make CMakeFiles/ProjectLibrary.dir/src/functions.cpp.i
+.PHONY : src/functions.cpp.i
 
-src/TestLab.s: src/TestLab.cpp.s
+src/functions.s: src/functions.cpp.s
 
-.PHONY : src/TestLab.s
+.PHONY : src/functions.s
 
 # target to generate assembly for a file
-src/TestLab.cpp.s:
-	$(MAKE) -f CMakeFiles/ProjectLibrary.dir/build.make CMakeFiles/ProjectLibrary.dir/src/TestLab.cpp.s
-.PHONY : src/TestLab.cpp.s
+src/functions.cpp.s:
+	$(MAKE) -f CMakeFiles/ProjectLibrary.dir/build.make CMakeFiles/ProjectLibrary.dir/src/functions.cpp.s
+.PHONY : src/functions.cpp.s
 
 # Help Target
 help:
@@ -196,16 +294,24 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... run"
 	@echo "... ProjectLibrary"
-	@echo "... Lab2"
+	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... list_install_components"
+	@echo "... install"
+	@echo "... gmock_main"
+	@echo "... gmock"
+	@echo "... gtest_main"
+	@echo "... gtest"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/TestLab.o"
-	@echo "... src/TestLab.i"
-	@echo "... src/TestLab.s"
+	@echo "... src/functions.o"
+	@echo "... src/functions.i"
+	@echo "... src/functions.s"
 .PHONY : help
 
 
