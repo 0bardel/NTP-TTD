@@ -1,7 +1,7 @@
 # NTP-TTD
 Test-Driven Development project for NTP class. Made by Mateusz Bardel and Szymon Antkowiak.
 
-#useful links
+# Useful links
 
 The barebones of testing environment and what is currently in master repo. 
 Some functions were taken from recent cpp laboratories
