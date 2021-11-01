@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -Wall -g  -shared -Wl,-soname,libProjectLibrary.so -o libProjectLibrary.so CMakeFiles/ProjectLibrary.dir/src/functions.cpp.o 

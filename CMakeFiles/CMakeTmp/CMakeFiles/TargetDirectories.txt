@@ -1,3 +1,0 @@
-/home/stud2020/0bardel/TDD/CMakeFiles/CMakeTmp/CMakeFiles/rebuild_cache.dir
-/home/stud2020/0bardel/TDD/CMakeFiles/CMakeTmp/CMakeFiles/cmTC_736f0.dir
-/home/stud2020/0bardel/TDD/CMakeFiles/CMakeTmp/CMakeFiles/edit_cache.dir
