@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 
 set(CMAKE_BUILD_TYPE debug)
-set(gtest_build_samples ON)
+set(gtest_build_samples OFF)
 
 if (POLICY CMP0048)
   cmake_policy(SET CMP0048 NEW)
@@ -25,8 +25,8 @@ include(CMakeDependentOption)
 include(GNUInstallDirs)
 
 #Note that googlemock target already builds googletest
-option(BUILD_GMOCK "Builds the googlemock subproject" ON)
-option(INSTALL_GTEST "Enable installation of googletest. (Projects embedding googletest may want to turn this OFF.)" ON)
+option(BUILD_GMOCK "Builds the googlemock subproject" OFF)
+option(INSTALL_GTEST "Enable installation of googletest. (Projects embedding googletest may want to turn this OFF.)" OFF)
 
 if(BUILD_GMOCK)
   add_subdirectory( googlemock )
