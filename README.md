@@ -13,3 +13,6 @@ https://github.com/google/googletest
 User guide
 https://google.github.io/googletest/
 
+# Turning off some not needed features
+
+In `googletest\CMakeLists.txt` change ON to OFF in `gtest_build_samples`, `BUILD_GMOCK` and `INSTALL_GTEST` options. That's already done in this repo.
