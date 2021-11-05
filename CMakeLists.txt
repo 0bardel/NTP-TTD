@@ -26,15 +26,20 @@ add_compile_options(${CMAKE_CXX_FLAGS})
 #----------------------------------------------------------------------------
 # Create library
 # --- implicite ---
-include_directories(${PROJECT_SOURCE_DIR}/include googletest/include)
+include_directories(
+  ${PROJECT_SOURCE_DIR}/include
+  ${PROJECT_SOURCE_DIR}/googletest/googletest/include)
 add_subdirectory(googletest) # add googletest subdirectory
 
 file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
-add_library(ProjectLibrary SHARED ${SOURCES})
+add_library(ProjectLibrary STATIC ${SOURCES})
 
+#----------------------------------------------------------------------------
+
+file(GLOB TESTSOURCES "${PROJECT_SOURCE_DIR}/tests/*.cpp")
 
 #----------------------------------------------------------------------------
 # Create executable
 
-add_executable(run main.cpp)
-target_link_libraries(run PUBLIC ProjectLibrary  gtest)
+add_executable(test main.cpp ${TESTSOURCES})
+target_link_libraries(test PUBLIC ProjectLibrary gtest)
