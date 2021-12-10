@@ -95,8 +95,6 @@
 // being defined as many user-defined container types don't have
 // value_type.
 
-// GOOGLETEST_CM0001 DO NOT DELETE
-
 #ifndef GOOGLETEST_INCLUDE_GTEST_GTEST_PRINTERS_H_
 #define GOOGLETEST_INCLUDE_GTEST_GTEST_PRINTERS_H_
 
@@ -360,7 +358,7 @@ GTEST_IMPL_FORMAT_C_STRING_AS_POINTER_(char);
 GTEST_IMPL_FORMAT_C_STRING_AS_POINTER_(const char);
 GTEST_IMPL_FORMAT_C_STRING_AS_POINTER_(wchar_t);
 GTEST_IMPL_FORMAT_C_STRING_AS_POINTER_(const wchar_t);
-#ifdef __cpp_char8_t
+#ifdef __cpp_lib_char8_t
 GTEST_IMPL_FORMAT_C_STRING_AS_POINTER_(char8_t);
 GTEST_IMPL_FORMAT_C_STRING_AS_POINTER_(const char8_t);
 #endif
@@ -479,6 +477,12 @@ inline void PrintTo(char8_t c, ::std::ostream* os) {
 }
 #endif
 
+// gcc/clang __{u,}int128_t
+#if defined(__SIZEOF_INT128__)
+GTEST_API_ void PrintTo(__uint128_t v, ::std::ostream* os);
+GTEST_API_ void PrintTo(__int128_t v, ::std::ostream* os);
+#endif  // __SIZEOF_INT128__
+
 // Overloads for C strings.
 GTEST_API_ void PrintTo(const char* s, ::std::ostream* os);
 inline void PrintTo(char* s, ::std::ostream* os) {
@@ -586,6 +590,12 @@ inline void PrintTo(internal::StringView sp, ::std::ostream* os) {
 #endif  // GTEST_INTERNAL_HAS_STRING_VIEW
 
 inline void PrintTo(std::nullptr_t, ::std::ostream* os) { *os << "(nullptr)"; }
+
+#if GTEST_HAS_RTTI
+inline void PrintTo(const std::type_info& info, std::ostream* os) {
+  *os << internal::GetTypeName(info);
+}
+#endif  // GTEST_HAS_RTTI
 
 template <typename T>
 void PrintTo(std::reference_wrapper<T> ref, ::std::ostream* os) {
@@ -741,6 +751,14 @@ class UniversalPrinter<Optional<T>> {
       UniversalPrint(*value, os);
     }
     *os << ')';
+  }
+};
+
+template <>
+class UniversalPrinter<decltype(Nullopt())> {
+ public:
+  static void Print(decltype(Nullopt()), ::std::ostream* os) {
+    *os << "(nullopt)";
   }
 };
 
