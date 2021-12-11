@@ -28,7 +28,8 @@ add_compile_options(${CMAKE_CXX_FLAGS})
 # --- implicite ---
 include_directories(
   ${PROJECT_SOURCE_DIR}/include
-  ${PROJECT_SOURCE_DIR}/googletest/googletest/include)
+  ${PROJECT_SOURCE_DIR}/googletest/googletest/include
+  ${PROCJET_SOURCE_DIR}/googletest/googlemock/include)
 add_subdirectory(googletest) # add googletest subdirectory
 
 file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
@@ -42,4 +43,4 @@ file(GLOB TESTSOURCES "${PROJECT_SOURCE_DIR}/tests/*.cpp")
 # Create executable
 
 add_executable(test main.cpp ${TESTSOURCES})
-target_link_libraries(test PUBLIC ProjectLibrary gtest)
+target_link_libraries(test PUBLIC ProjectLibrary gtest gmock) # gtest is also inside gmock
