@@ -32,5 +32,6 @@ TEST_F(GradeFixture, IDsAreUpdating) {
 TEST_F(GradeFixture, NamesAreSetsCorrectly){
     ocena.setStudent("Zofia");
     using ::testing::StrEq;
-    EXPECT_THAT(ocena.name(), StrEq("Zofia")); //wymaga gmock
+    EXPECT_STREQ(ocena.name().c_str(), "Zofia");
+    EXPECT_THAT(ocena.name(), StrEq("Zofia")); //alternatywne wykokanie tego samego testu, wymaga gmock
 }

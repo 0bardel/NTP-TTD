@@ -5,22 +5,14 @@
 
 class Grade {
 public:
-    //C'tor domyślny
+    //C'tor default
     Grade();
 
-    //C'tor z inicjalizacja
+    //C'tor with initialization
     Grade(const char*, float);
 
-    //ustawia nazwę
+    //sets student name
     void setStudent(const char*);
-
-    //getters
-    std::string name() const { return _name; };
-    float grade() const { return _grade; };
-    unsigned ID() const { return _ID; }
-
-    //important because of Gtest logic
-    static void reset() { _currentID = 0; };
 
 private:
     static unsigned _currentID;
@@ -28,6 +20,17 @@ private:
     std::string _name;
     float _grade;
     const unsigned _ID;
+
+#ifndef NDEBUG
+public:
+    //getters
+    std::string name() const { return _name; };
+    float grade() const { return _grade; };
+    unsigned ID() const { return _ID; }
+
+    //important because of Gtest logic
+    static void reset() { _currentID = 0; };
+#endif
 };
 
 #endif

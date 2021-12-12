@@ -1,8 +1,4 @@
 #include "sample2.h"
-#include <iostream>
-
-using std::cout;
-using std::endl;
 
 unsigned Grade::_currentID{ 0 };
 
